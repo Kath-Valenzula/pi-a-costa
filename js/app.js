@@ -179,3 +179,16 @@ function sumarEcoPoints(puntosGanados) {
     }
   }
 }
+
+function generarQR(idProducto) {
+  const producto = productos.find(p => p.id === idProducto);
+  const qrDiv = document.getElementById(`qrcode-${idProducto}`);
+  qrDiv.innerHTML = ""; // Limpia QR anterior
+  new QRCode(qrDiv, {
+    text: `Producto: ${producto.nombre}\nPrecio: $${producto.precio}`,
+    width: 100,
+    height: 100
+  });
+
+  sumarEcoPoints(2); // ✅ Gana puntos por generar QR
+}
