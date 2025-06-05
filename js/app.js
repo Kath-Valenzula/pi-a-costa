@@ -17,6 +17,7 @@ function agregarAlCarrito(id) {
   carrito.push(producto);
   localStorage.setItem("carrito", JSON.stringify(carrito));
   alert("Producto agregado al carrito");
+  sumarEcoPoints(10);
 }
 
 function mostrarCarrito() {
@@ -41,6 +42,7 @@ function agregarAWishlist(id) {
   wishlist.push(producto);
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
   alert("Producto agregado a wishlist");
+  sumarEcoPoints(5);
 }
 
 function mostrarWishlist() {
@@ -157,4 +159,23 @@ function loginUsuario() {
   sessionStorage.setItem("usuarioActivo", email);
   alert("Bienvenido/a " + usuario.nombre);
   window.location.href = "perfil.html";
+}
+// === PUNTOS ===
+document.getElementById("eco-puntos").textContent = usuario.puntos || 0;
+
+function sumarEcoPoints(puntosGanados) {
+  const email = sessionStorage.getItem("usuarioActivo");
+  if (!email) return;
+
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const index = usuarios.findIndex(u => u.email === email);
+
+  if (index !== -1) {
+    usuarios[index].puntos = (usuarios[index].puntos || 0) + puntosGanados;
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    if (document.getElementById("eco-puntos")) {
+      document.getElementById("eco-puntos").textContent = usuarios[index].puntos;
+    }
+  }
 }
