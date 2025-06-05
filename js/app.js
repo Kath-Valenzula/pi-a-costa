@@ -121,3 +121,40 @@ function eliminarProducto(id) {
   setProductos(productos);
   mostrarProductosAdmin();
 }
+
+// === REGISTRO ===
+function registrarUsuario() {
+  const nombre = document.getElementById("nombre-registro").value.trim();
+  const email = document.getElementById("email-registro").value.trim().toLowerCase();
+  const clave = document.getElementById("clave-registro").value;
+
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  if (usuarios.find(u => u.email === email)) {
+    alert("Este correo ya está registrado.");
+    return;
+  }
+
+  usuarios.push({ nombre, email, clave, idioma: "es" });
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  alert("Registro exitoso. Ahora puedes iniciar sesión.");
+  window.location.href = "login.html";
+}
+
+// === LOGIN ===
+function loginUsuario() {
+  const email = document.getElementById("email-login").value.trim().toLowerCase();
+  const clave = document.getElementById("clave-login").value;
+
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const usuario = usuarios.find(u => u.email === email && u.clave === clave);
+
+  if (!usuario) {
+    alert("Correo o clave incorrectos.");
+    return;
+  }
+
+  sessionStorage.setItem("usuarioActivo", email);
+  alert("Bienvenido/a " + usuario.nombre);
+  window.location.href = "perfil.html";
+}
