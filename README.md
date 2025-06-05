@@ -1,10 +1,10 @@
-# 👗 Piña Costa - Tienda de Moda Online
+#  Piña Costa - Tienda de Moda Online
 
 Bienvenidos a **Piña Costa**, una tienda web femenina y lujosa desarrollada como proyecto de interfaz gráfica con HTML, CSS, JavaScript y Bootstrap 5. Este sitio simula una experiencia real de ecommerce con funcionalidades modernas como catálogo, carrito, wishlist, sistema de recompensas Eco-Points, QR y un maniquí virtual interactivo.
 
 ---
 
-## 🌈 Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
 - HTML5 + CSS3 (estética pastel, elegante y responsiva)
 - JavaScript (con localStorage / sessionStorage)
@@ -15,7 +15,7 @@ Bienvenidos a **Piña Costa**, una tienda web femenina y lujosa desarrollada com
 
 ---
 
-## 🗂 Estructura del Proyecto
+##  Estructura del Proyecto
 
 piña-costa/
 │
@@ -43,32 +43,32 @@ piña-costa/
 
 ---
 
-## 🧩 Funcionalidades
+##  Funcionalidades
 
-### ✅ Usuario
+###  Usuario
 - Registro y login funcional con `localStorage`
 - Cambiar idioma ES/EN (perfil)
 - Acumular y visualizar Eco-Points
 
-### ✅ Cliente
+###  Cliente
 - Navegación clara y estética responsive
 - Catálogo dinámico con botones
 - Wishlist con favoritos persistentes
 - Carrito con resumen total
 - Escaneo y generación de QR por producto
 
-### ✅ Admin
+###  Admin
 - CRUD de productos sin servidor (localStorage)
 - Imágenes, precios y nombre editable
 
-### ✅ Extra
+###  Extra
 - Pop-up de bienvenida
 - Maniquí virtual combinable
 - Recompensas Eco-Points por acciones
 
 ---
 
-## 💾 ¿Cómo usar?
+##  ¿Cómo usar?
 
 1. Abre `index.html` en tu navegador.
 2. Regístrate o inicia sesión.
@@ -77,6 +77,6 @@ piña-costa/
 
 ---
 
-## 🧠 Créditos
+##  Créditos
 
 Desarrollado por: Kath Stark 
