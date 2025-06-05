@@ -1,0 +1,29 @@
+.maniqui-container {
+  width: 220px;
+  height: 400px;
+  position: relative;
+}
+
+.maniqui-base {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.prenda-superior {
+  width: 100%;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 2;
+}
+
+.prenda-inferior {
+  width: 100%;
+  position: absolute;
+  top: 180px;
+  left: 0;
+  z-index: 2;
+}
