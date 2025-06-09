@@ -199,7 +199,7 @@ Precio: $${producto.precio}`,
 
 function mostrarPerfil() {
   const emailActivo = sessionStorage.getItem("usuarioActivo");
-  const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const usuario = usuarios.find(u => u.email === emailActivo);
 
   if (!usuario) return;
@@ -232,7 +232,7 @@ function cambiarIdioma(idiomaManual) {
   document.getElementById("lbl-email").textContent = t["lbl-email"];
 
   const emailActivo = sessionStorage.getItem("usuarioActivo");
-  const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const index = usuarios.findIndex(u => u.email === emailActivo);
   if (index !== -1) {
     usuarios[index].idioma = idioma;
