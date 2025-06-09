@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mix & Match - Piña Costa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .maniqui-container {
+      position: relative;
+      width: 300px;
+      margin: auto;
+    }
+    .maniqui-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .selector-prendas {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body class="text-center">
+  <div class="container mt-4">
+    <h2>👗 Mix & Match</h2>
+    <div class="maniqui-container my-4">
+      <img src="../assets/maniqui_base.png" alt="Maniquí base">
+      <img id="top-layer" src="" alt="Top seleccionado">
+      <img id="bottom-layer" src="" alt="Bottom seleccionado">
+      <img id="accesorio-layer" src="" alt="Accesorio seleccionado">
+    </div>
+
+    <div class="selector-prendas row justify-content-center">
+      <div class="col-md-3">
+        <label for="select-top" class="form-label">Top</label>
+        <select id="select-top" class="form-select">
+          <option value="">-- Seleccionar --</option>
+          <option value="../assets/ropa/top_rosa.png">Top Rosa</option>
+          <option value="../assets/ropa/blazer_verde.png">Blazer Verde</option>
+          <option value="../assets/ropa/crop_top_pastel.png">Crop Top Pastel</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="select-bottom" class="form-label">Bottom</label>
+        <select id="select-bottom" class="form-select">
+          <option value="">-- Seleccionar --</option>
+          <option value="../assets/ropa/falda_dorada.png">Falda Dorada</option>
+          <option value="../assets/ropa/pantalon_beige.png">Pantalón Beige</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="select-accesorio" class="form-label">Accesorio</label>
+        <select id="select-accesorio" class="form-select">
+          <option value="">-- Seleccionar --</option>
+          <option value="../assets/ropa/bolso_ratan.png">Bolso Ratán</option>
+          <option value="../assets/ropa/zapato_nude.png">Zapato Nude</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("select-top").addEventListener("change", function() {
+      document.getElementById("top-layer").src = this.value;
+    });
+
+    document.getElementById("select-bottom").addEventListener("change", function() {
+      document.getElementById("bottom-layer").src = this.value;
+    });
+
+    document.getElementById("select-accesorio").addEventListener("change", function() {
+      document.getElementById("accesorio-layer").src = this.value;
+    });
+  </script>
+</body>
+</html>

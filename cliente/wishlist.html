@@ -7,14 +7,22 @@
 </head>
 <body>
   <div class="container mt-4">
-    <h2>Mi Wishlist</h2>
-    <ul class="list-group" id="wishlist-lista"></ul>
+    <h2 class="text-center mb-4">❤️ Mi Wishlist</h2>
+    <ul class="list-group mb-3" id="wishlist-lista"></ul>
+    <div class="text-end">
+      <button class="btn btn-danger mt-2" onclick="vaciarWishlist()">Vaciar wishlist</button>
+    </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="../js/app.js"></script>
   <script>
+    function vaciarWishlist() {
+      localStorage.removeItem("wishlist");
+      mostrarWishlist();
+    }
+
     mostrarWishlist();
   </script>
 </body>
 </html>
-

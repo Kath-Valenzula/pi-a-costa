@@ -3,21 +3,22 @@ function cerrarPopup() {
   document.getElementById("popup")?.remove();
 }
 
-// Mock productos
-const productos = [
-  { id: 1, nombre: "Vestido Rosa", precio: 39000 },
-  { id: 2, nombre: "Blusa Verde", precio: 29000 },
-  { id: 3, nombre: "Falda Dorada", precio: 31000 }
-];
+// Obtener productos guardados
+function obtenerProductosGuardados() {
+  return JSON.parse(localStorage.getItem("productos")) || [];
+}
 
 // Carrito
 function agregarAlCarrito(id) {
   let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const productos = obtenerProductosGuardados();
   const producto = productos.find(p => p.id === id);
-  carrito.push(producto);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  alert("Producto agregado al carrito");
-  sumarEcoPoints(10);
+  if (producto) {
+    carrito.push(producto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    alert("Producto agregado al carrito");
+    sumarEcoPoints(10);
+  }
 }
 
 function mostrarCarrito() {
@@ -37,12 +38,15 @@ function mostrarCarrito() {
 
 // Wishlist
 function agregarAWishlist(id) {
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const productos = obtenerProductosGuardados();
+  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   const producto = productos.find(p => p.id === id);
-  wishlist.push(producto);
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  alert("Producto agregado a wishlist");
-  sumarEcoPoints(5);
+  if (producto) {
+    wishlist.push(producto);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    alert("Producto agregado a wishlist");
+    sumarEcoPoints(5);
+  }
 }
 
 function mostrarWishlist() {
@@ -56,6 +60,7 @@ function mostrarWishlist() {
     lista.appendChild(item);
   });
 }
+
 
 // CRUD - ADMIN
 function getProductos() {
@@ -124,7 +129,7 @@ function eliminarProducto(id) {
   mostrarProductosAdmin();
 }
 
-// === REGISTRO ===
+
 function registrarUsuario() {
   const nombre = document.getElementById("nombre-registro").value.trim();
   const email = document.getElementById("email-registro").value.trim().toLowerCase();
@@ -137,13 +142,12 @@ function registrarUsuario() {
     return;
   }
 
-  usuarios.push({ nombre, email, clave, idioma: "es" });
+  usuarios.push({ nombre, email, clave, idioma: "es", puntos: 0 });
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
   alert("Registro exitoso. Ahora puedes iniciar sesión.");
   window.location.href = "login.html";
 }
 
-// === LOGIN ===
 function loginUsuario() {
   const email = document.getElementById("email-login").value.trim().toLowerCase();
   const clave = document.getElementById("clave-login").value;
@@ -160,8 +164,6 @@ function loginUsuario() {
   alert("Bienvenido/a " + usuario.nombre);
   window.location.href = "perfil.html";
 }
-// === PUNTOS ===
-document.getElementById("eco-puntos").textContent = usuario.puntos || 0;
 
 function sumarEcoPoints(puntosGanados) {
   const email = sessionStorage.getItem("usuarioActivo");
@@ -181,28 +183,20 @@ function sumarEcoPoints(puntosGanados) {
 }
 
 function generarQR(idProducto) {
+  const productos = obtenerProductosGuardados();
   const producto = productos.find(p => p.id === idProducto);
   const qrDiv = document.getElementById(`qrcode-${idProducto}`);
-  qrDiv.innerHTML = ""; // Limpia QR anterior
+  qrDiv.innerHTML = "";
   new QRCode(qrDiv, {
-    text: `Producto: ${producto.nombre}\nPrecio: $${producto.precio}`,
+    text: `Producto: ${producto.nombre}
+Precio: $${producto.precio}`,
     width: 100,
     height: 100
   });
 
-  sumarEcoPoints(2); // ✅ Gana puntos por generar QR
+  sumarEcoPoints(2);
 }
 
-// === LOGIN SIMULADO ===
-// Guardar usuario (esto se haría desde un login real)
-if (!localStorage.getItem("usuarios")) {
-  localStorage.setItem("usuarios", JSON.stringify([
-    { nombre: "Claudia", email: "claudia@pinacosta.cl", idioma: "es" }
-  ]));
-  sessionStorage.setItem("usuarioActivo", "claudia@pinacosta.cl");
-}
-
-// === MOSTRAR PERFIL ===
 function mostrarPerfil() {
   const emailActivo = sessionStorage.getItem("usuarioActivo");
   const usuarios = JSON.parse(localStorage.getItem("usuarios"));
@@ -213,22 +207,22 @@ function mostrarPerfil() {
   document.getElementById("nombre-usuario").textContent = usuario.nombre;
   document.getElementById("correo-usuario").textContent = usuario.email;
   document.getElementById("idioma").value = usuario.idioma || "es";
+  document.getElementById("eco-puntos").textContent = usuario.puntos || 0;
   cambiarIdioma(usuario.idioma || "es");
 }
 
-// === IDIOMA ===
 function cambiarIdioma(idiomaManual) {
   const idioma = idiomaManual || document.getElementById("idioma").value;
   const traducciones = {
     es: {
       titulo: "Mi Perfil",
       "lbl-nombre": "Nombre:",
-      "lbl-email": "Correo:",
+      "lbl-email": "Correo:"
     },
     en: {
       titulo: "My Profile",
       "lbl-nombre": "Name:",
-      "lbl-email": "Email:",
+      "lbl-email": "Email:"
     }
   };
 
@@ -246,7 +240,6 @@ function cambiarIdioma(idiomaManual) {
   }
 }
 
-// === SESIÓN ===
 function verificarSesion() {
   if (!sessionStorage.getItem("usuarioActivo")) {
     alert("Debes iniciar sesión para acceder al perfil.");
